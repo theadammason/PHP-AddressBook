@@ -104,8 +104,7 @@
                     </div>
                 </td>
                 <td>
-                    <form action="{{url('contact/'.$contact->id)}}" method="POST">
-                        {{csrf_field()}} {{method_field('UPDATE')}}
+                    <form >
                         <button type="button" class="btn btn-danger" data-toggle="modal" data-target=".modal">
                       <i class="fa fa-btn fa-trash"></i>Edit
                     </button>
@@ -142,7 +141,7 @@
                         <label for="contact-name" class="col-sm-3 control-label">Name</label>
 
                         <div class="col-sm-6">
-                            <input type="text" name="name" id="contact-name" class="form-control" value="{{ $contact->name }}">
+                            <input type="text" name="name" id="contact-name" class="form-control">
                         </div>
                     </div>
                     <!-- Contact Phone -->
@@ -150,7 +149,7 @@
                         <label for="contact-phone" class="col-sm-3 control-label">Phone</label>
 
                         <div class="col-sm-6">
-                            <input type="text" name="phone" id="contact-phone" class="form-control" placeholder="xxx-xxx-xxxx" pattern="^\d{3}-\d{3}-\d{4}$" value="{{ $contact->phone }}">
+                            <input type="text" name="phone" id="contact-phone" class="form-control" pattern="^\d{3}-\d{3}-\d{4}$">
                         </div>
                     </div>
                     <!-- Contact Address -->
@@ -158,7 +157,7 @@
                         <label for="contact-address" class="col-sm-3 control-label">Address</label>
 
                         <div class="col-sm-6">
-                            <input type="text" name="address" id="contact-address" class="form-control" value="{{ $contact->address }}">
+                            <input type="text" name="address" id="contact-address" class="form-control">
                         </div>
                     </div>
                     <!-- Contact Email -->
@@ -166,7 +165,7 @@
                         <label for="contact-email" class="col-sm-3 control-label">Email</label>
 
                         <div class="col-sm-6">
-                            <input type="email" name="email" id="contact-email" class="form-control" value="{{ $contact->email }}">
+                            <input type="email" name="email" id="contact-email" class="form-control">
                         </div>
                     </div>
 
@@ -174,8 +173,8 @@
                     <div class="form-group">
                         <div class="col-sm-offset-3 col-sm-6">
                             <button type="submit" class="btn btn-default">
-                                      <i class="fa fa-plus"></i> Add Contact
-                                  </button>
+                              <i class="fa fa-plus"></i> Edit
+                            </button>
                         </div>
                     </div>
                 </form>

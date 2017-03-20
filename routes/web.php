@@ -3,9 +3,15 @@
 use App\Contact;
 use Illuminate\Http\Request;
 
-Route::get('/', function () {
+    Route::get('/', function () {
         return view('addressbook', [
             'addressbook' => Contact::orderBy('name', 'asc')->get()
+        ]);
+    });
+
+    Route::get('/contact/{id}', function ($id) {
+        return view('addressbook', [
+            'addressbook' => Contact::where("id='$id'")->get()
         ]);
     });
 
@@ -26,7 +32,7 @@ Route::get('/', function () {
         $contact->save();
         return redirect('/');
     });
-    
+
 
     Route::delete('/contact/{id}', function ($id) {
         Contact::findOrFail($id)->delete();
