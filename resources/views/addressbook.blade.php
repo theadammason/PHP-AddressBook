@@ -75,37 +75,29 @@
             @foreach ($addressbook as $contact)
             <tr>
                 <td style="display:none">
-                    <div class="contactId">
+                    <div id="contactId{{$contact->id}}">
                         {{$contact->id}}
                     </div>
                 </td>
                 <!-- Contact name -->
                 <td class="table-text">
-                    <div>
-                        {{ $contact->name }}
-                    </div>
+                    <div id="contactName{{$contact->id}}">{{ $contact->name }}</div>
                 </td>
                 <!-- Contact name -->
                 <td class="table-text">
-                    <div>
-                        {{ $contact->phone }}
-                    </div>
+                    <div id="contactPhone{{$contact->id}}">{{ $contact->phone }}</div>
                 </td>
                 <!-- Contact name -->
                 <td class="table-text">
-                    <div>
-                        {{ $contact->address }}
-                    </div>
+                    <div id="contactAddress{{$contact->id}}">{{ $contact->address }}</div>
                 </td>
                 <!-- Contact name -->
                 <td class="table-text">
-                    <div>
-                        {{ $contact->email }}
-                    </div>
+                    <div id="contactEmail{{$contact->id}}">{{ $contact->email }}</div>
                 </td>
                 <td>
                     <form >
-                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target=".modal">
+                        <button type="button" class="btn btn-danger" onClick="editContact({{$contact->id}})" data-toggle="modal" data-target=".modal">
                       <i class="fa fa-btn fa-trash"></i>Edit
                     </button>
                     </form>
@@ -125,6 +117,8 @@
     </table>
 </div>
 
+<!--Modal containing edit contact function -->
+
 <div class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -133,15 +127,16 @@
                 <h4 class="modal-title">Edit contact</h4>
             </div>
             <div class="modal-body">
-                <form action="/contact" method="POST" class="form-horizontal">
+                <form action="{{url('contact/'.$contact->id)}}" method="POST" class="form-horizontal">
                     {{ csrf_field() }}
+                    {{method_field('PUT')}}
 
                     <!-- Contact Name -->
                     <div class="form-group">
                         <label for="contact-name" class="col-sm-3 control-label">Name</label>
 
                         <div class="col-sm-6">
-                            <input type="text" name="name" id="contact-name" class="form-control">
+                            <input type="text" name="name" id="modal-name" class="form-control">
                         </div>
                     </div>
                     <!-- Contact Phone -->
@@ -149,7 +144,7 @@
                         <label for="contact-phone" class="col-sm-3 control-label">Phone</label>
 
                         <div class="col-sm-6">
-                            <input type="text" name="phone" id="contact-phone" class="form-control" pattern="^\d{3}-\d{3}-\d{4}$">
+                            <input type="text" name="phone" id="modal-phone" class="form-control" pattern="^\d{3}-\d{3}-\d{4}$">
                         </div>
                     </div>
                     <!-- Contact Address -->
@@ -157,7 +152,7 @@
                         <label for="contact-address" class="col-sm-3 control-label">Address</label>
 
                         <div class="col-sm-6">
-                            <input type="text" name="address" id="contact-address" class="form-control">
+                            <input type="text" name="address" id="modal-address" class="form-control">
                         </div>
                     </div>
                     <!-- Contact Email -->
@@ -165,7 +160,7 @@
                         <label for="contact-email" class="col-sm-3 control-label">Email</label>
 
                         <div class="col-sm-6">
-                            <input type="email" name="email" id="contact-email" class="form-control">
+                            <input type="email" name="email" id="modal-email" class="form-control">
                         </div>
                     </div>
 
@@ -173,7 +168,7 @@
                     <div class="form-group">
                         <div class="col-sm-offset-3 col-sm-6">
                             <button type="submit" class="btn btn-default">
-                              <i class="fa fa-plus"></i> Edit
+                              <i class="fa fa-plus"></i> Save Changes
                             </button>
                         </div>
                     </div>
