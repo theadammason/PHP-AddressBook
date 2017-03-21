@@ -127,9 +127,9 @@
                 <h4 class="modal-title">Edit contact</h4>
             </div>
             <div class="modal-body">
-                <form action="{{url('contact/'.$contact->id)}}" method="POST" class="form-horizontal">
+                <form action="{{url('contact-update/'.$contact->id)}}" method="POST" class="form-horizontal">
                     {{ csrf_field() }}
-                    {{method_field('PUT')}}
+                    <!-- {{method_field('UPDATE')}} -->
 
                     <!-- Contact Name -->
                     <div class="form-group">
