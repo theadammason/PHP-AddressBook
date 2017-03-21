@@ -75,9 +75,7 @@
             @foreach ($addressbook as $contact)
             <tr>
                 <td style="display:none">
-                    <div id="contactId{{$contact->id}}">
-                        {{$contact->id}}
-                    </div>
+                    <div id="contactId{{$contact->id}}">{{$contact->id}}</div>
                 </td>
                 <!-- Contact name -->
                 <td class="table-text">
@@ -103,7 +101,7 @@
                     </form>
                 </td>
                 <td>
-                    <form action="{{url('contact/'.$contact->id)}}" method="POST">
+                    <form action="{{url('contact/'.$contact->id)}}" method="POST" name="delete{{$contact->id}}">
                         {{csrf_field()}} {{method_field('DELETE')}}
                         <button type="submit" class="btn btn-danger">
                           <i class="fa fa-btn fa-trash"></i>Delete
@@ -127,10 +125,16 @@
                 <h4 class="modal-title">Edit contact</h4>
             </div>
             <div class="modal-body">
-                <form action="{{url('contact/'.$contact->id)}}" method="POST" class="form-horizontal">
+                <form action="{{url('edit/')}}" method="POST" class="form-horizontal" name="modalSave">
                     {{ csrf_field() }}
-                    {{method_field('PUT')}}
+                    <!-- {{method_field('PUT')}} -->
+                    <div class="form-group">
+                        <label for="contact-name" class="col-sm-3 control-label"></label>
 
+                        <div class="col-sm-6">
+                            <input type="hidden" name="contactId" id="modal-id" class="form-control">
+                        </div>
+                    </div>
                     <!-- Contact Name -->
                     <div class="form-group">
                         <label for="contact-name" class="col-sm-3 control-label">Name</label>

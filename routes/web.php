@@ -18,6 +18,7 @@ use Illuminate\Http\Request;
                 ->withInput()
                 ->withErrors($validator);
         }
+
         $contact = new Contact;
         $contact->name = $request->name;
         $contact->phone = $request->phone;
@@ -27,24 +28,11 @@ use Illuminate\Http\Request;
         return redirect('/');
     });
 
-    Route::put('/contact/{id}', function (Request $request) {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|max:255',
-        ]);
-        if ($validator->fails()) {
-            return redirect('/')
-                ->withInput()
-                ->withErrors($validator);
-        }
-        $contact = new Contact;
-        $contact->name = $request->name;
-        $contact->phone = $request->phone;
-        $contact->address = $request->address;
-        $contact->email = $request->email;
-        $contact->update();
+    Route::post('/edit', function (Request $request) {
+
+        Contact::where('id', $request->contactId)->update(array('name' => $request->name, 'phone' => $request->phone, 'address' => $request->address, 'email' => $request->email));
         return redirect('/');
     });
-
 
     Route::delete('/contact/{id}', function ($id) {
         Contact::findOrFail($id)->delete();
